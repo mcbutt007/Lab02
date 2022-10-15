@@ -9,7 +9,6 @@ namespace Lab02.Services
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;
-        readonly List<Location> locations;
         readonly List<Hotel> hotels;
         readonly List<Genera> genus;
         readonly List<Specie> species;
@@ -24,14 +23,6 @@ namespace Lab02.Services
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
-            };
-            locations = new List<Location>()
-            {
-                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Đà Lạt", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Vũng Tàu", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Phú Quốc", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Hà Nội", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "TP Hồ Chí Minh", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"}
             };
         }
 
@@ -67,6 +58,30 @@ namespace Lab02.Services
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
+        }
+    }
+    public class MockLocationDataStore : LocationDataStore<Location>
+    {
+        readonly List<Location> locations;
+        public MockLocationDataStore()
+        {
+            locations = new List<Location>()
+            {
+                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Đà Lạt", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Vũng Tàu", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Phú Quốc", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "Hà Nội", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationID = Guid.NewGuid().ToString(), LocationName = "TP Hồ Chí Minh", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"}
+            };
+        }
+        public async Task<Location> GetLocationAsync(string id)
+        {
+            return await Task.FromResult(locations.FirstOrDefault(s => s.LocationID == id));
+        }
+
+        public async Task<IEnumerable<Location>> GetLocationsAsync(bool forceRefresh = false)
+        {
+            return await Task.FromResult(locations);
         }
     }
 }

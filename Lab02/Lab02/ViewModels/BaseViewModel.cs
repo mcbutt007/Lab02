@@ -11,6 +11,7 @@ namespace Lab02.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public LocationDataStore<Location> LocationDataStore => DependencyService.Get<LocationDataStore<Location>>();
 
         bool isBusy = false;
         public bool IsBusy
