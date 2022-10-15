@@ -14,6 +14,7 @@ namespace Lab02
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<MockLocationDataStore>();
             MainPage = new AppShell();
         }
 
