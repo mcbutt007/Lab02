@@ -137,9 +137,9 @@ namespace Lab02.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteHotelAsync(string id)
+        public async Task<bool> DeleteLastHotelAsync()
         {
-            var oldHotel = hotels.Where((Hotel arg) => arg.HotelID == id).FirstOrDefault();
+            var oldHotel = hotels.LastOrDefault();
             hotels.Remove(oldHotel);
 
             return await Task.FromResult(true);

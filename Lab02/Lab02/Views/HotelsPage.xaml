@@ -10,7 +10,9 @@
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
-    <RefreshView x:DataType="local:HotelsViewModel" Command="{Binding LoadHotelsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <StackLayout>
+        <SearchBar Placeholder="Search hotels..." PlaceholderColor="LightCoral" />
+        <RefreshView x:DataType="local:HotelsViewModel" Command="{Binding LoadHotelsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="HotelsListView"
                 ItemsSource="{Binding Hotels}"
                 SelectionMode="None">
@@ -30,4 +32,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </RefreshView>
+        <Button Text="REMOVE LAST" Padding="10" Margin="10,10,10,10" Command="{Binding DeleteLastHotelCommand}">
+        </Button>
+    </StackLayout>
 </ContentPage>
