@@ -18,15 +18,19 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Hotel">
-                        <Label Text="{Binding HotelID}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
+                    <StackLayout Padding="10" x:DataType="model:Hotel" Orientation="Horizontal">
+                        <Image Source="{Binding Image} " HeightRequest="80" Aspect="AspectFit"></Image>
+                            <StackLayout Orientation="Vertical">
                         <Label Text="{Binding HotelName}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
+                            FontSize="Large" />
+                        <Label Text="{Binding Status}" 
+                            LineBreakMode="NoWrap"
+                            TextColor="Red"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="Large" />
+                            </StackLayout>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

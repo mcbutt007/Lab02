@@ -16,15 +16,14 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Location">
-                        <Label Text="{Binding LocationID}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
+                    <StackLayout Padding="10" x:DataType="model:Location" Orientation="Horizontal">
+                        <Image Source="{Binding Image} " HeightRequest="80" Aspect="AspectFit"></Image>
                         <Label Text="{Binding LocationName}" 
                             LineBreakMode="NoWrap"
+                            FontSize="Large"
+                            HorizontalOptions="Center" VerticalOptions="Center" Padding="20"
                             Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
+                            />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

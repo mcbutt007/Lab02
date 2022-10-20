@@ -3,6 +3,7 @@ using Lab02.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,6 +15,7 @@ namespace Lab02.ViewModels
     {
         private string locationID;
         public ObservableCollection<Hotel> Hotels { get; }
+        public Collection<Location> Locations { get; }
         public Command LoadHotelsCommand { get; }
         public Command DeleteLastHotelCommand { get; }
         public Command AddHotelCommand { get; }
@@ -32,11 +34,28 @@ namespace Lab02.ViewModels
 
         public HotelsViewModel()
         {
-            Title = "Browse";
+            Title = LocationNamel(locationID);
             Hotels = new ObservableCollection<Hotel>();
             LoadHotelsCommand = new Command(async () => await ExecuteLoadHotelsCommand());
 
             DeleteLastHotelCommand = new Command(async () => await DeleteLastHotel());
+        }
+
+        private string LocationNamel(string locationID)
+        {
+            switch (locationID)
+            {
+                case "1":
+                    return "Đà Lạt";
+                case "2":
+                    return "Vũng Tàu";
+                case "3":
+                    return "Phú Quốc";
+                case "4":
+                    return "Hà Nội";
+                default:
+                    return "TP Hồ Chí Minh";
+            }
         }
 
         async Task DeleteLastHotel()

@@ -10,6 +10,6 @@ namespace Lab02.Models
         public string Address { get; set; }
         public string Introduce { get; set; }
         public string Image { get; set; }
-        public string IsBooked { get; set; }
+        public string Status { get; set; }
     }
 }
