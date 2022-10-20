@@ -40,7 +40,6 @@ namespace Lab02.ViewModels
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", ex.Message , "OK");
                 Debug.WriteLine(ex);
             }
             finally
@@ -68,10 +67,14 @@ namespace Lab02.ViewModels
         async void OnLocationSelected(Location location)
         {
             if (location == null)
+            {
+            //await App.Current.MainPage.DisplayAlert("Alert", "Hello" , "OK");
+
                 return;
+            }
 
             // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={location.LocationID}");
+            await Shell.Current.GoToAsync($"{nameof(HotelsPage)}?{nameof(HotelsViewModel.LocationID)}={location.LocationID}");
         }
     }
 }

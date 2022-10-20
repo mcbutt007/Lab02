@@ -3,17 +3,31 @@ using Lab02.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Lab02.ViewModels
 {
+    [QueryProperty(nameof(LocationID), nameof(LocationID))]
     public class HotelsViewModel : BaseViewModel
     {
+        private string locationID;
         public ObservableCollection<Hotel> Hotels { get; }
         public Command LoadHotelsCommand { get; }
         public Command AddHotelCommand { get; }
         public Command<Hotel> HotelTapped { get; }
+        public string LocationID
+        {
+            get
+            {
+                return locationID;
+            }
+            set
+            {
+                locationID = value;
+            }
+        }
 
         public HotelsViewModel()
         {
@@ -32,6 +46,8 @@ namespace Lab02.ViewModels
                 var hotels = await HotelDataStore.GetHotelsAsync(true);
                 foreach (var hotel in hotels)
                 {
+                    if (hotel.LocationID != locationID)
+                        continue;
                     Hotels.Add(hotel);
                 }
             }
