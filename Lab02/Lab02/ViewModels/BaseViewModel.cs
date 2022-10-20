@@ -13,6 +13,8 @@ namespace Lab02.ViewModels
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public LocationDataStore<Location> LocationDataStore => DependencyService.Get<LocationDataStore<Location>>();
 
+        public HotelDataStore<Hotel> HotelDataStore => DependencyService.Get<HotelDataStore<Hotel>>();
+
         bool isBusy = false;
         public bool IsBusy
         {

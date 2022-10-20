@@ -15,6 +15,7 @@ namespace Lab02
 
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<MockLocationDataStore>();
+            DependencyService.Register<MockHotelDataStore>();
             MainPage = new AppShell();
         }
 
