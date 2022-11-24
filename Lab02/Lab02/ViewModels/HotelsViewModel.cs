@@ -17,7 +17,6 @@ namespace Lab02.ViewModels
         public ObservableCollection<Hotel> Hotels { get; }
         public Collection<Location> Locations { get; }
         public Command LoadHotelsCommand { get; }
-        public Command DeleteLastHotelCommand { get; }
         public Command AddHotelCommand { get; }
         public Command<Hotel> HotelTapped { get; }
         public string LocationID
@@ -39,7 +38,6 @@ namespace Lab02.ViewModels
             LoadHotelsCommand = new Command(async () => await ExecuteLoadHotelsCommand());
             AddHotelCommand = new Command(OnAddHotel);
 
-            DeleteLastHotelCommand = new Command(async () => await DeleteLastHotel());
         }
 
         async void OnAddHotel(object obj)
@@ -61,16 +59,6 @@ namespace Lab02.ViewModels
                     return "Hà Nội";
                 default:
                     return "TP Hồ Chí Minh";
-            }
-        }
-
-        async Task DeleteLastHotel()
-        {
-            bool answer = await Application.Current.MainPage.DisplayAlert("Warning!", "Do you want to delete it?", "Yes", "No");
-            if (Hotels.Count > 0 && answer == true)
-            {
-                await HotelDataStore.DeleteLastHotelAsync();
-                await ExecuteLoadHotelsCommand();
             }
         }
 

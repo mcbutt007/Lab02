@@ -31,28 +31,36 @@
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout
-                            Padding="10"
-                            x:DataType="model:Hotel"
-                            Orientation="Horizontal">
-                            <Image
-                                Aspect="AspectFit"
-                                HeightRequest="80"
-                                Source="{Binding Image}" />
-                            <StackLayout Orientation="Vertical">
-                                <Label
-                                    FontSize="Large"
-                                    LineBreakMode="NoWrap"
-                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                    Text="{Binding HotelName}" />
-                                <Label
-                                    FontSize="Large"
-                                    LineBreakMode="NoWrap"
-                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                    Text="{Binding Status}"
-                                    TextColor="Red" />
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem BackgroundColor="LightPink" Text="Xóa" />
+                                    <SwipeItem BackgroundColor="LightGreen" Text="Sửa" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <StackLayout
+                                Padding="10"
+                                x:DataType="model:Hotel"
+                                Orientation="Horizontal">
+                                <Image
+                                    Aspect="AspectFit"
+                                    HeightRequest="80"
+                                    Source="{Binding Image}" />
+                                <StackLayout Orientation="Vertical">
+                                    <Label
+                                        FontSize="Large"
+                                        LineBreakMode="NoWrap"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        Text="{Binding HotelName}" />
+                                    <Label
+                                        FontSize="Large"
+                                        LineBreakMode="NoWrap"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        Text="{Binding Status}"
+                                        TextColor="Red" />
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

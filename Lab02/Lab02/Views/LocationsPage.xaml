@@ -29,29 +29,37 @@
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout
-                            Padding="10"
-                            x:DataType="model:Location"
-                            Orientation="Horizontal">
-                            <Image
-                                Aspect="AspectFit"
-                                HeightRequest="80"
-                                Source="{Binding Image}" />
-                            <Label
-                                Padding="20"
-                                FontSize="Large"
-                                HorizontalOptions="Center"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                Text="{Binding LocationName}"
-                                VerticalOptions="Center" />
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:LocationsViewModel}}, Path=LocationTapped}"
-                                    CommandParameter="{Binding .}"
-                                    NumberOfTapsRequired="1" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem BackgroundColor="LightPink" Text="Xóa" />
+                                    <SwipeItem BackgroundColor="LightGreen" Text="Sửa" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <StackLayout
+                                Padding="10"
+                                x:DataType="model:Location"
+                                Orientation="Horizontal">
+                                <Image
+                                    Aspect="AspectFit"
+                                    HeightRequest="80"
+                                    Source="{Binding Image}" />
+                                <Label
+                                    Padding="20"
+                                    FontSize="Large"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    Text="{Binding LocationName}"
+                                    VerticalOptions="Center" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:LocationsViewModel}}, Path=LocationTapped}"
+                                        CommandParameter="{Binding .}"
+                                        NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -10,8 +10,6 @@ namespace Lab02.Services
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;
-        //readonly List<Genera> genus;
-        //readonly List<Specie> species;
 
         public MockDataStore()
         {
@@ -63,6 +61,7 @@ namespace Lab02.Services
     public class MockLocationDataStore : LocationDataStore<Location>
     {
         readonly List<Location> locations;
+
         public MockLocationDataStore()
         {
             locations = new List<Location>()
@@ -74,6 +73,31 @@ namespace Lab02.Services
                 new Location { LocationID = "5", LocationName = "TP Hồ Chí Minh", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"}
             };
         }
+
+        public async Task<bool> AddLocationAsync(Location location)
+        {
+            locations.Add(location);
+
+            return await Task.FromResult(true);
+        }
+
+        public async Task<bool> UpdateLocationAsync(Location location)
+        {
+            var oldLocation = locations.Where((Location arg) => arg.LocationID == location.LocationID).FirstOrDefault();
+            locations.Remove(oldLocation);
+            locations.Add(location);
+
+            return await Task.FromResult(true);
+        }
+
+        public async Task<bool> DeleteLocationAsync(string id)
+        {
+            var oldLocation = locations.Where((Location arg) => arg.LocationID == id).FirstOrDefault();
+            locations.Remove(oldLocation);
+
+            return await Task.FromResult(true);
+        }
+
         public async Task<Location> GetLocationAsync(string id)
         {
             return await Task.FromResult(locations.FirstOrDefault(s => s.LocationID == id));
@@ -84,7 +108,7 @@ namespace Lab02.Services
             return await Task.FromResult(locations);
         }
     }
-}
+
     public class MockHotelDataStore : HotelDataStore<Hotel>
     {
         readonly List<Hotel> hotels;
@@ -120,7 +144,6 @@ namespace Lab02.Services
                 new Hotel { HotelID = Guid.NewGuid().ToString(), HotelName="TP Hồ Chí Minh 5", LocationID="5" , Image = "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg", Status="Available"}
             };
         }
-
         public async Task<bool> AddHotelAsync(Hotel hotel)
         {
             hotels.Add(hotel);
@@ -137,9 +160,9 @@ namespace Lab02.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteLastHotelAsync()
+        public async Task<bool> DeleteHotelAsync(string id)
         {
-            var oldHotel = hotels.LastOrDefault();
+            var oldHotel = hotels.Where((Hotel arg) => arg.HotelID == id).FirstOrDefault();
             hotels.Remove(oldHotel);
 
             return await Task.FromResult(true);
@@ -155,3 +178,4 @@ namespace Lab02.Services
             return await Task.FromResult(hotels);
         }
     }
+}
