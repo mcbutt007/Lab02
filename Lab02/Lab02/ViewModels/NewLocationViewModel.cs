@@ -1,6 +1,7 @@
 ﻿using Lab02.Models;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -47,7 +48,17 @@ namespace Lab02.ViewModels
                 Image = Image
             };
 
+            string message = "Thêm mới thành công";
+            try
+            {
             await LocationDataStore.AddLocationAsync(newLocation);
+            } catch (Exception ex)
+            {
+                message = ex.Message;
+            } finally
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", message, "OK");
+            }
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

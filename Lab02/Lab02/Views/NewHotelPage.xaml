@@ -32,7 +32,7 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     FontSize="Medium"
-                    Text="Hình TP:"
+                    Text="Thành Phố:"
                     VerticalOptions="Center" />
                 <Entry
                     Grid.Row="0"
@@ -42,7 +42,11 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Text="{Binding Image}" />
-                <Entry Grid.Row="2" Grid.Column="1" />
+                <Picker
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    ItemDisplayBinding="{Binding CityList}"
+                    ItemsSource="{Binding Locations}" />
             </Grid>
             <Button
                 Margin="10"
