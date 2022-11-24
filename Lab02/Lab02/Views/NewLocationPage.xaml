@@ -2,7 +2,9 @@
 <ContentPage
     x:Class="Lab02.Views.NewLocationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:Lab02.ViewModels"
+    x:DataType="viewmodels:NewLocationViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Image
@@ -26,11 +28,18 @@
                     FontSize="Medium"
                     Text="Hình TP:"
                     VerticalOptions="Center" />
-                <Entry Grid.Row="0" Grid.Column="1" />
-                <Entry Grid.Row="1" Grid.Column="1" />
+                <Entry
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding CityName}" />
+                <Entry
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Image}" />
             </Grid>
             <Button
                 Margin="10"
+                Command="{Binding SaveCommand}"
                 HorizontalOptions="Center"
                 Text="Lưu"
                 VerticalOptions="Center" />

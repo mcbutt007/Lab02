@@ -1,7 +1,6 @@
 ﻿using Lab02.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -9,51 +8,52 @@ namespace Lab02.ViewModels
 {
     public class NewHotelViewModel : BaseViewModel
     {
-        private string text;
-        private string description;
+        private string hotelname;
+        private string image;
+        private string city;
 
         public NewHotelViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
-            CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !String.IsNullOrWhiteSpace(hotelname)
+                && !String.IsNullOrWhiteSpace(image)
+                && !String.IsNullOrWhiteSpace(city);
         }
 
-        public string Text
+        public string HotelName
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            get => hotelname;
+            set => SetProperty(ref hotelname, value);
         }
 
-        public string Description
+        public string Image
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            get => image;
+            set => SetProperty(ref image, value);
+        }
+
+        public string City
+        {
+            get => city;
+            set => SetProperty(ref city, value);
         }
 
         public Command SaveCommand { get; }
-        public Command CancelCommand { get; }
-
-        private async void OnCancel()
-        {
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
-        }
 
         private async void OnSave()
         {
             Hotel newHotels = new Hotel()
             {
                 HotelID = Guid.NewGuid().ToString(),
-                HotelName = Text,
-                Address = Description
+                HotelName = HotelName,
+                Image = Image,
+                LocationID = City
             };
 
             await HotelDataStore.AddHotelAsync(newHotels);
