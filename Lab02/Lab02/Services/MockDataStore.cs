@@ -66,11 +66,11 @@ namespace Lab02.Services
         {
             locations = new List<Location>()
             {
-                new Location { LocationID = "1", LocationName = "Đà Lạt", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = "2", LocationName = "Vũng Tàu", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = "3", LocationName = "Phú Quốc", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = "4", LocationName = "Hà Nội", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
-                new Location { LocationID = "5", LocationName = "TP Hồ Chí Minh", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"}
+                new Location { LocationName = "Đà Lạt", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationName = "Vũng Tàu", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationName = "Phú Quốc", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationName = "Hà Nội", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"},
+                new Location { LocationName = "TP Hồ Chí Minh", Image = "https://a.cdn-hotels.com/gdcs/production154/d1245/0a3c326f-cedf-4cf9-ada2-71f7517d0a09.jpg"}
             };
         }
 
@@ -90,7 +90,7 @@ namespace Lab02.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteLocationAsync(string id)
+        public async Task<bool> DeleteLocationAsync(int id)
         {
             var oldLocation = locations.Where((Location arg) => arg.LocationID == id).FirstOrDefault();
             locations.Remove(oldLocation);
@@ -98,7 +98,7 @@ namespace Lab02.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Location> GetLocationAsync(string id)
+        public async Task<Location> GetLocationAsync(int id)
         {
             return await Task.FromResult(locations.FirstOrDefault(s => s.LocationID == id));
         }

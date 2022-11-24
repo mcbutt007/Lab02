@@ -8,8 +8,8 @@ namespace Lab02.Services
     {
         Task<bool> AddLocationAsync(T location);
         Task<bool> UpdateLocationAsync(T location);
-        Task<bool> DeleteLocationAsync(string id);
-        Task<T> GetLocationAsync(string id);
+        Task<bool> DeleteLocationAsync(int id);
+        Task<T> GetLocationAsync(int id);
         Task<IEnumerable<T>> GetLocationsAsync(bool forceRefresh = false);
     }
 }

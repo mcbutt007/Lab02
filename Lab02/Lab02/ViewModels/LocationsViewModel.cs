@@ -1,6 +1,8 @@
 ﻿using Lab02.Models;
-using Lab02.Views;
 using System;
+using System.IO;
+using Lab02.Services;
+using Lab02.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -10,6 +12,18 @@ namespace Lab02.ViewModels
 {
     public class LocationsViewModel : BaseViewModel
     {
+        static LocationDatabase database;
+        public static LocationDatabase Database
+    {
+        get
+        {
+            if (database == null)
+            {
+                database = new LocationDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Location.db3"));
+            }
+            return database;
+        }
+    }
         private Location _selectedLocation;
 
         public ObservableCollection<Location> Locations { get; }
@@ -42,6 +56,13 @@ namespace Lab02.ViewModels
                 var locations = await LocationDataStore.GetLocationsAsync(true);
                 foreach (var location in locations)
                 {
+                    try
+                    {
+                    await Database.SaveLocationAsync(location);
+                    } catch (Exception ex)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                    }
                     Locations.Add(location);
                 }
             }

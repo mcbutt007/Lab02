@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SQLite;
+using System;
 
 namespace Lab02.Models
 {
     public class Hotel
     {
+        [PrimaryKey, AutoIncrement]
         public string HotelID { get; set; }
         public string LocationID { get; set; }
         public string HotelName { get; set; }

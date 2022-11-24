@@ -43,7 +43,6 @@ namespace Lab02.ViewModels
         {
             Location newLocation = new Location()
             {
-                LocationID = Guid.NewGuid().ToString(),
                 LocationName = CityName,
                 Image = Image
             };
