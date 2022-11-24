@@ -15,14 +15,21 @@ namespace Lab02.ViewModels
         public ObservableCollection<Location> Locations { get; }
         public Command LoadLocationsCommand { get; }
         public Command<Location> LocationTapped { get; }
+        public Command AddLocationCommand { get; }
 
         public LocationsViewModel()
         {
-            Title = "Booking";
+            Title = "Thành phố";
             Locations = new ObservableCollection<Location>();
             LoadLocationsCommand = new Command(async () => await ExecuteLoadLocationsCommand());
 
             LocationTapped = new Command<Location>(OnLocationSelected);
+            AddLocationCommand = new Command(OnAddLocation);
+        }
+
+        async void OnAddLocation(object obj)
+        {
+            await Shell.Current.GoToAsync(nameof(NewLocationPage));
         }
 
         async Task ExecuteLoadLocationsCommand()

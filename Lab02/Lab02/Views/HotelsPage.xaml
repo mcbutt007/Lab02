@@ -1,42 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Lab02.Views.HotelsPage"
-             Title="{Binding Title}"
-             xmlns:local="clr-namespace:Lab02.ViewModels"  
-             xmlns:model="clr-namespace:Lab02.Models"  
-             x:Name="BrowseHotelsPage">
+<ContentPage
+    x:Class="Lab02.Views.HotelsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Lab02.ViewModels"
+    xmlns:model="clr-namespace:Lab02.Models"
+    x:Name="BrowseHotelsPage"
+    Title="{Binding Title}"
+    x:DataType="local:HotelsViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddHotelCommand}" Text="THÊM" />
+    </ContentPage.ToolbarItems>
     <!--
-      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
-      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+        x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     <StackLayout>
-        <SearchBar Placeholder="Search hotels..." PlaceholderColor="LightCoral" />
-        <RefreshView x:DataType="local:HotelsViewModel" Command="{Binding LoadHotelsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView x:Name="HotelsListView"
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="120"
+            Source="https://i1.wp.com/blog.keycafe.com/wp-content/uploads/2019/05/screen-shot-2017-10-24-at-9-54-22-am.png" />
+        <RefreshView
+            x:DataType="local:HotelsViewModel"
+            Command="{Binding LoadHotelsCommand}"
+            IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView
+                x:Name="HotelsListView"
                 ItemsSource="{Binding Hotels}"
                 SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Hotel" Orientation="Horizontal">
-                        <Image Source="{Binding Image} " HeightRequest="80" Aspect="AspectFit"></Image>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="10"
+                            x:DataType="model:Hotel"
+                            Orientation="Horizontal">
+                            <Image
+                                Aspect="AspectFit"
+                                HeightRequest="80"
+                                Source="{Binding Image}" />
                             <StackLayout Orientation="Vertical">
-                        <Label Text="{Binding HotelName}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="Large" />
-                        <Label Text="{Binding Status}" 
-                            LineBreakMode="NoWrap"
-                            TextColor="Red"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="Large" />
+                                <Label
+                                    FontSize="Large"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    Text="{Binding HotelName}" />
+                                <Label
+                                    FontSize="Large"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    Text="{Binding Status}"
+                                    TextColor="Red" />
                             </StackLayout>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
-        <Button Text="REMOVE LAST" Padding="10" Margin="10,10,10,10" Command="{Binding DeleteLastHotelCommand}">
-        </Button>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 </ContentPage>

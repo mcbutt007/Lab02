@@ -1,39 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Lab02.Views.LocationsPage"
-             Title="{Binding Title}"
-             xmlns:local="clr-namespace:Lab02.ViewModels"  
-             xmlns:model="clr-namespace:Lab02.Models"  
-             x:Name="BrowseLocationsPage">
+<ContentPage
+    x:Class="Lab02.Views.LocationsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Lab02.ViewModels"
+    xmlns:model="clr-namespace:Lab02.Models"
+    x:Name="BrowseLocationsPage"
+    Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddLocationCommand}" Text="THÊM" />
+    </ContentPage.ToolbarItems>
     <!--
-      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
-      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+        x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
-    <RefreshView x:DataType="local:LocationsViewModel" Command="{Binding LoadLocationsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView x:Name="LocationsListView"
+    <StackLayout>
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="120"
+            Source="https://i1.wp.com/blog.keycafe.com/wp-content/uploads/2019/05/screen-shot-2017-10-24-at-9-54-22-am.png" />
+        <RefreshView
+            x:DataType="local:LocationsViewModel"
+            Command="{Binding LoadLocationsCommand}"
+            IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView
+                x:Name="LocationsListView"
                 ItemsSource="{Binding Locations}"
                 SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Location" Orientation="Horizontal">
-                        <Image Source="{Binding Image} " HeightRequest="80" Aspect="AspectFit"></Image>
-                        <Label Text="{Binding LocationName}" 
-                            LineBreakMode="NoWrap"
-                            FontSize="Large"
-                            HorizontalOptions="Center" VerticalOptions="Center" Padding="20"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:LocationsViewModel}}, Path=LocationTapped}"		
-                                CommandParameter="{Binding .}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="10"
+                            x:DataType="model:Location"
+                            Orientation="Horizontal">
+                            <Image
+                                Aspect="AspectFit"
+                                HeightRequest="80"
+                                Source="{Binding Image}" />
+                            <Label
+                                Padding="20"
+                                FontSize="Large"
+                                HorizontalOptions="Center"
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                Text="{Binding LocationName}"
+                                VerticalOptions="Center" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:LocationsViewModel}}, Path=LocationTapped}"
+                                    CommandParameter="{Binding .}"
+                                    NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

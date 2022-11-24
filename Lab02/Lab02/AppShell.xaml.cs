@@ -14,6 +14,8 @@ namespace Lab02
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(HotelsPage), typeof(HotelsPage));
+            Routing.RegisterRoute(nameof(NewLocationPage), typeof(NewLocationPage));
+            Routing.RegisterRoute(nameof(NewHotelPage), typeof(NewHotelPage));
         }
 
     }

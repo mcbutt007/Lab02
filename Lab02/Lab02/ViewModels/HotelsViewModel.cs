@@ -37,8 +37,14 @@ namespace Lab02.ViewModels
             Title = LocationNamel(locationID);
             Hotels = new ObservableCollection<Hotel>();
             LoadHotelsCommand = new Command(async () => await ExecuteLoadHotelsCommand());
+            AddHotelCommand = new Command(OnAddHotel);
 
             DeleteLastHotelCommand = new Command(async () => await DeleteLastHotel());
+        }
+
+        async void OnAddHotel(object obj)
+        {
+            await Shell.Current.GoToAsync(nameof(NewHotelPage));
         }
 
         private string LocationNamel(string locationID)
@@ -60,8 +66,7 @@ namespace Lab02.ViewModels
 
         async Task DeleteLastHotel()
         {
-            bool answer = false;
-            answer = await Application.Current.MainPage.DisplayAlert("Warning!", "Do you want to delete it?", "Yes", "No");
+            bool answer = await Application.Current.MainPage.DisplayAlert("Warning!", "Do you want to delete it?", "Yes", "No");
             if (Hotels.Count > 0 && answer == true)
             {
                 await HotelDataStore.DeleteLastHotelAsync();
